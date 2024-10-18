@@ -1,0 +1,161 @@
+/*{
+  border: solid red
+}*/
+
+
+* {
+  box-sizing: border-box;
+  
+}
+
+body {
+  font-family: sans-serif;
+}
+
+
+.left {
+
+  width: 40%;
+}
+
+
+.right {
+
+  width: auto;
+
+}
+
+
+.left, .right {
+
+  display: inline-block;
+  margin-left: 20px;
+}
+
+
+
+
+th, td {
+ padding: 0.5em;
+ text-align: center;
+}
+
+.user-input {
+  width: 40px;
+}
+
+
+.footer {
+  display: flex;
+  margin-top: 2em;
+}
+
+td {
+
+border-radius: 10px;
+box-sizing: border-box;
+box-shadow: #4186ed;
+}
+
+.button {
+  border: none;
+  background-color: #4186ed;
+  color: #fff;
+  border-radius: 4px;
+  font-weight: bold;
+  padding: 1.5em 2em;
+margin-left: 250PX;
+font-size: 15px;
+
+}
+
+#drinks-img {
+  width: 25px;
+  margin: 0;
+  visibility: hidden /* hide by default*/
+}
+
+
+
+.table3, .table4 {
+
+  display: block;
+  width:100%;
+  height: 415px;
+  font-size: 20px;
+}
+
+.table2 {
+
+  padding-top: 30px;
+  font-size: 15
+  px;
+}
+
+.final-grade {
+
+  align-items: center;
+}
+
+
+.table1 {
+
+  font-size: 25px;
+ align-self:auto;
+}
+
+.table3 {
+
+  font-size: 20px;
+}
+
+h1 {
+
+  margin-left: 20px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+font-size: 50px;
+}
+
+h3 {
+  margin-left: 12px;
+}
+
+#greenface {
+  width: 50px;
+  margin: 0;
+  visibility:collapse;
+
+}
+
+#yellowface {
+  width: 50px;
+  margin: 0;
+  visibility:collapse;
+
+}
+
+#redface {
+  width: 50px;
+  margin: 0;
+  visibility:collapse;
+  display: inline-block;
+
+}
+
+.numbersofdrinkspermonth, #greenface , #yellowface ,  #redface {
+
+display: inline-block;
+
+}
+
+td .numbersofdrinkspermonth .averagecostperdrink {
+
+  padding: 10px;
+
+
+}
+
+td .numbersofdrinkspermonth {
+
+  margin-bottom: 30px;
+}
