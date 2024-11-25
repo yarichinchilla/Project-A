@@ -1,137 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;800&display=swap" rel="stylesheet">
+
+  <!-- Shoelace JavaScript -->
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace/dist/shoelace.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace/dist/themes/light.css">
+
+  <!-- FullPage.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.30/fullpage.min.js" 
+    integrity="sha512-XjHDYXqFXd3cWle8uxMnQFVcpjzm+mWZfJApBAyREtai0v/jJy9Na+PJlmrnaum7qb4B3BnwKAZd47piZRvoZA==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer">
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.30/fullpage.min.css">
+
+  <!-- Custom Stylesheet -->
   <link rel="stylesheet" href="styles.css">
-  <title>Project Name</title>
+
+  <title>FAF</title>
 </head>
-
 <body>
-
-  <div>
-
-    <h1>Alcohol Cost Calculator</h1>  
+  <!-- Loading Screen -->
+  <div id="loading">
+    <img src="images/Logointro.png" alt="Loading Animation">
   </div>
 
-
-    <div class = "left">
-
-      <div class = "images left">
-        <img src="Images/bottle.png" height="380px">
-        <img src="Images/cocktail.png" height="200px">
+  <!-- FullPage.js Wrapper -->
+  <div id="fullpage">
+    <!-- Home Section -->
+    <div class="section section-home">
+      <img id="logo" src="images/Logointro.png" alt="Main Logo">
+      <img src="images/machinehome.png" alt="Machine Graphic" id="machine">
+      <div class="content">
+        <h2>Strongly focused on design & efficiency</h2>
+        <p>A journey of reinvention</p>
+        <sl-button variant="success" size="large" onclick="fullpage_api.moveTo(2)">More</sl-button>
       </div>
+      <div class="logo-track">
+        <div class="logo"><img src="images/BHP_2017_logo.svg" alt="Client Logo 1"></div>
+        <div class="logo"><img src="images/WDS_BIG.svg" alt="Client Logo 2"></div>
+        <div class="logo"><img src="images/shell-logo-svg-vector.svg" alt="Client Logo 3"></div>
+        <div class="logo"><img src="images/Fortescue_Metals_Group.svg" alt="Client Logo 4"></div>
+      </div>
+    </div>
 
-        <div class = "input drinks cost">
-          <table class="table1">
-            <tbody>
-              <tr>
-                <th scope="row">Cheapest cost per drink</th>
-                <td><input id="ccdp" type="text" ></td>
-              </tr>
-              
-              <tr>
-                <th scope="row">Expensive cost per drink</th>
-                <td><input id="ecdp" type="text"></td>
-              </tr>
-            </tbody>
-          </table>
+    <!-- Milestone Section -->
+    <div class="section section-milestones">
+      <h1><span class="sm">LEARN ABOUT</span><br>Our Journey</h1>
+      <div class="milestone-cols">
+        <div class="milestone-col">
+          <img src="images/Untitled-1-04.svg" alt="Milestone 1 Icon" class="milestone-img">
+          <h3>Onsite Machining Began</h3>
+        </div>
+        <div class="milestone-col">
+          <img src="images/Untitled-1-05.svg" alt="Milestone 2 Icon" class="milestone-img">
+          <h3>Development of Machines</h3>
+        </div>
+        <div class="milestone-col">
+          <img src="images/Untitled-1-06.svg" alt="Milestone 3 Icon" class="milestone-img">
+          <h3>FAF Technology!</h3>
         </div>
 
         <div>
-          <h3>Enter the number of drinks purchased on</h3>
+          <h3>With over 25 years of industry experience, we create advanced technology and expertly designed MACHINES built by skilled machinists</h3>
         </div>
-
-
-        <div class="inputdrinksperweek">
-          <table class="table2">
-            <thead>
-          
-              <th>Monday</th>
-              <th>Tuesday</th>
-              <th>Wednesday</th>
-              <th>Thursday</th>
-              <th>Friday</th>
-              <th>Saturday</th>
-              <th>Sunday</th> 
-            </thead>
-          
-            <tbody>
-              <td><input type="text" class="user-input monday"></td>
-              <td><input type="text" class="user-input tuesday"></td>
-              <td><input type="text" class="user-input wednesday"></td>
-              <td><input type="text" class="user-input thursday"></td>
-              <td><input type="text" class="user-input friday"></td>
-              <td><input type="text" class="user-input saturday"></td>
-              <td><input type="text" class="user-input sunday"></td>
-            </tbody>
-          </table>
-          <div class="footer">
-            <button id="calculate-btn" class="button">CALCULATE </button>
-          </div>
-                             
-        </div>
-  
+      </div>
     </div>
 
-
-
-
-    <div class="right">
-
-
-          <table class="table3">
-            <thead>
-              
-              <th><img src="Images/money.png" height="78px"></th>
-              <th>Monthly</th>
-              <th>Yearly</th>
-            
-            </thead>
-            <tbody>
-              <tr id="the most you could spend">
-                <td>The most you could spend</td>
-                <td><input type="text" class="themostyoucouldspendmonthly" readonly></td>
-                <td><input type="text" class="themostyoucouldspendyearly" readonly></td>
-            
-              </tr>
-              <tr id="The least you could spend">
-                <td>The least you could spend</td>
-                <td><input type="text" class="theleastyoucouldspendmonthly" readonly></td>
-                <td><input type="text" class="theleastyoucouldspendyearly" readonly></td>
-            
-              </tr>
-              <tr id="The average amount you could spend">
-                <td>The average amount you could spend</td>
-                <td><input type="text" class="theaverageamountyoucouldspendmonthly" readonly></td>
-                <td><input type="text" class="theaverageamountyoucouldspendyearly" readonly></td>
-              </tr>
-            </tbody>
-          </table>
-     
-            <table class="table4">
-              <thead>
-                <th>Average cost per drink</th>
-                <th>Number of drinks per month></th>
-              </thead>
-
-
-              
-              <tbody>
-                <td><input type="text" class="averagecostperdrink" readonly></td>
-                <td><input type="text" class="numbersofdrinkspermonth" readonly>            
-                  <img src="Images/green-face.png"  id="greenface">
-                  <img src="Images/yellow-face.png"  id="yellowface">
-                  <img src="Images/red-face.png"  id="redface"></td> 
-            
-                </tbody>
-              </table>
-
-
+    <!-- Gallery Section -->
+    <div class="section section-industries">
+      <h1>Efficient problem-solving in the Resources and Energy Industries</h1>
+      <div class="grid">
+        <div>
+          <h3>Hydroelectric</h3>
+          <img src="Images-Industries/Hydro.jpg" alt="Hydro Industry">
+        </div>
+        <div>
+          <h3>Mining</h3>
+          <img src="Images-Industries/Mines.jpg" alt="Mining Industry">
+        </div>
+        <div>
+          <h3>Offshore</h3>
+          <img src="Images-Industries/Offshore.jpg" alt="Offshore Industry">
+        </div>
+      </div>
     </div>
-    <script src="main.js"></script>
+
+    <!-- Machines Section -->
+    <div class="section section-machines">
+      <h1><span class="sm">LEARN ABOUT</span><br>Our Machines</h1>
+      <div class="machines-cols">
+        <div class="machine-col">
+          <img src="Images-Services/Balancingmachines.jpeg" alt="Machine 1 Icon" class="machine-img">
+          <h3>Balancing</h3>
+        </div>
+        <div class="machine-col">
+          <img src="Images-Services/Flangefacing.jpeg" alt="Machine 2 Icon" class="machine-img">
+          <h3>Flange Facing</h3>
+        </div>
+        <div class="machine-col">
+          <img src="Images-Services/Small Circular Milling.jpeg" alt="Machine 3 Icon" class="machine-img">
+          <h3>Circular Milling!</h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- Newsletter Section -->
+    <div class="section section-newsletter">
+      <h1>Subscribe to our Newsletter</h1>
+      <form id="form-subscription">
+        <sl-input label="Your Email Address" placeholder="Enter your email" id="email-input"></sl-input>
+        <sl-button type="submit" variant="primary" id="subscribe-button">Subscribe</sl-button>
+      </form>
+    </div>
+  </div>
+
+  <!-- GSAP Animation -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+
+  <!-- Main Script -->
+  <script src="main.js"></script>
 </body>
-
-    </html>
-
+</html>

@@ -1,191 +1,128 @@
-// get calculate btn 
-let calculateBtn = document.querySelector('#calculate-btn');
-	// listen for click
+// FullPage.js Initialization
+new fullpage('#fullpage', {
+  autoScrolling: true,
+  navigation: true,
+  navigationPosition: 'right',
+  navigationTooltips: ['Home', 'Journey', 'Industries', 'Machines', 'Newsletter'],
+  showActiveTooltip: true,
+  responsiveWidth: 768, // Disable fullPage.js on smaller screens
+  onLeave: function (origin, destination) {
+    if (destination.index === 1) milestonesSection(destination);
+  },
+  afterRender: function () {
+    homeSection();
+  },
+});
 
-// step 4
-calculateBtn.addEventListener('click', function() {
-	calculateAverageCostDrink();
-	calculateDrinksMonthly();
-	calculateMostMoneyMonthly();
-	calculateLeastMoneyMonthly();
-	calculateAverageMoneyMonthly();
-	calculateMostMoneyYearly();
-	calculateLeastMoneyYearly();
-	calculateAverageMoneyYearly();
+// GSAP Animation for Home Section
+function homeSection() {
+  const tl = gsap.timeline({ delay: 0.5 });
+  tl.from('#logo', { x: -1000, opacity: 0, duration: 1.5, ease: 'bounce.out' })
+    .from('.section-home .content', { y: 30, opacity: 0, duration: 1, ease: 'power2.out' }, '-=1')
+    .from('#machine', { y: -1000, opacity: 0, duration: 1, ease: 'bounce.out' }, '-=0.5');
+}
 
+// GSAP Animation for Milestone Section
+function milestonesSection(destination) {
+  let section = destination.item;
+  let heading = section.querySelector('h1');
+  let milestoneCols = section.querySelectorAll('.milestone-col');
+
+  const tl = gsap.timeline({ delay: 0.5 });
+  tl.from(heading, { duration: 1, x: 500, opacity: 0, ease: 'bounce.out' })
+    .from(milestoneCols, { y: '-50', opacity: 0, duration: 0.5, stagger: 0.2, ease: 'power1.out' });
+}
+
+// GSAP Animation for Loading Screen
+window.addEventListener('load', () => {
+  const loadingScreen = document.getElementById('loading');
+  const logo = loadingScreen.querySelector('img');
+
+  const tl = gsap.timeline({
+    onComplete: () => loadingScreen.remove(), // Remove the loading screen after animation
+  });
+
+  tl.fromTo(logo, { scale: 0.5, opacity: 0 }, { scale: 1.2, opacity: 1, duration: 0.8, ease: 'bounce.out' })
+    .to(logo, { scale: 0, opacity: 0, duration: 1.2, ease: 'bounce.in' });
+});
+
+// Lightbox Functionality for Industries and Machines
+const lightbox = document.createElement('div');
+lightbox.id = 'lightbox';
+document.body.appendChild(lightbox);
+
+// Select images from both sections
+const allGalleryImages = document.querySelectorAll('.grid img, .machines-cols img');
+
+allGalleryImages.forEach(image => {
+  image.addEventListener('click', () => {
+    lightbox.classList.add('active');
+    const img = document.createElement('img');
+    img.src = image.src;
+
+    // Clear any existing content in lightbox
+    while (lightbox.firstChild) {
+      lightbox.removeChild(lightbox.firstChild);
+    }
+
+    // Add the clicked image to the lightbox
+    lightbox.appendChild(img);
+  });
+});
+
+lightbox.addEventListener('click', (e) => {
+  if (e.target !== e.currentTarget) return;
+  lightbox.classList.remove('active');
+});
+
+// Form Submission for Newsletter
+document.getElementById('form-subscription').addEventListener('submit', (event) => {
+  event.preventDefault(); // Prevent page reload
+  const email = document.getElementById('email-input').value.trim();
+
+  if (!validateEmail(email)) {
+    alert('Please enter a valid email.');
+    return;
+  }
+
+  alert(`Thank you for subscribing! Your email: ${email} has been registered.`);
+});
+
+// Email validation function
+function validateEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Simple email validation regex
+  return emailRegex.test(email);
+}
+
+// GSAP ScrollTrigger for Milestones Section
+gsap.registerPlugin(ScrollTrigger);
+
+document.addEventListener('DOMContentLoaded', () => {
+  gsap.from('.milestone-img', {
+    scrollTrigger: {
+      trigger: '.milestone-img',
+      start: 'top 80%',
+      end: 'bottom 50%',
+      toggleActions: 'play none none none',
+    },
+    y: 50,
+    opacity: 0,
+    duration: 1,
+    stagger: 0.2,
+    ease: 'power2.out',
+  });
 });
 
 
 
-// Output displayed on screen ----------------------------------
 
-
-//  fcn - calculate Average Cost per drink - Step # 5
-function calculateAverageCostDrink() {
-
-	//get 
-	let ecdp = Number(document.querySelector('#ecpd').value);
-	let ccdp = Number(document.querySelector('#ccpd').value);
-
-
-	// calculate 
-	let averageCostDrink = (ecdp + ccdp) / 2;
-
-	// show input
-	let averageCostDrinkinput = document.querySelector(".averagecostperdrink");
-
-}
-
-
-
-//  fcn - Total drinks purchased monthly - Step # 6
-function calculateDrinksMonthly() {
-
-	//get 
-	let mondayvalue = Number(document.querySelector('.user-input monday').value);
-	let tuesdayvalue = Number(document.querySelector('.user-input tuesday').value);
-	let wednesdayvalue = Number(document.querySelector('.user-input wednesday').value);
-	let thursdayvalue = Number(document.querySelector('.user-input thursday').value);
-	let fridayvalue = Number(document.querySelector('.user-input friday').value);
-	let saturdayvalue = Number(document.querySelector('.user-input saturday').value);
-	let sundayvalue = Number(document.querySelector('.user-input sunday').value);
-
-	// calculate 
-	let drinksMonthly = (mondayvalue + tuesdayvalue + wednesdayvalue + thursdayvalue + fridayvalue + saturdayvalue + sundayvalue) * 4;
-
-	// show input
-	let drinksMonthlyinput = document.querySelector('.numbersofdrinkspermonth');
-
-}
-
-
-//  fcn - calculate the most you could spend monthly - Step # 7
-function calculateMostMoneyMonthly() {
-
-	//get 
-	let ecdp = Number(document.querySelector('#ecpd').value);
-	let drinksMonthly = drinksMonthly;
-
-	// calculate 
-	let mostMoneyMonthly = ecdp * drinksMonthly;
-
-	// show input
-	let mostMoneyMonthlyinput = document.querySelector('.themostyoucouldspendmonthly');
-
-}
-
-
-
-//  fcn - calculate the least you could spend monthly - Step # 8
-function calculateLeastMoneyMonthly() {
-
-	//get 
-	let ccdp = Number(document.querySelector('#ecpd').value);
-	let drinksMonthly = drinksMonthly;
-
-	// calculate 
-	let leastMoneyMonthly = ccdp * drinksMonthly;
-
-	// show input
-	let leastMoneyMonthlyinput = document.querySelector('.theleastyoucouldspendmonthly');
-
-}
-
-
-
-
-//  fcn - calculate the average you could spend monthly - Step # 9
-function calculateAverageMoneyMonthly() {
-
-	//get 
-	let averageCostDrink = averageCostDrink;
-	let drinksMonthly = drinksMonthly;
-
-	// calculate 
-	let averageNoneyMonthly = averageCostDrink * drinksMonthly;
-
-	// show input
-	let averageNoneyMonthlyinput = document.querySelector('.the average amount you could spend monthly');
-
-}
-
-
-//  fcn - calculate the most you could spend yearly - Step # 10
-function calculateMostMoneyYearly() {
-
-	//get 
-	let drinksMonthly = drinksMonthly;
-	let ecdp = Number(document.querySelector('#ecpd').value);
-
-
-	// calculate 
-	let mostMoneyYearly = (drinksMonthly * 12) * (ecdp);
-
-	// show input
-	let mostMoneyYearlyinput = document.querySelector('.themostyou ouldspendyearly');
-
-}
-
-
-
-//  fcn - calculate the least you could spend yearly - Step # 11
-function calculateLeastMoneyYearly() {
-
-	//get 
-	let drinksMonthly = drinksMonthly;
-	let ccdp = Number(document.querySelector('#ecpd').value);
-
-
-	// calculate 
-	let leastMoneyYearly = (drinksMonthly * 12) * (ccdp);
-
-	// show input
-	let leastMoneyYearlyinput = document.querySelector('.theleastyoucouldspendyearly');
-
-
-}
-
-
-//  fcn - calculate the average you could spend yearly - Step # 12
-function calculateAverageMoneyYearly() {
-
-	//get 
-	let averageCostDrink = averageCostDrink;
-	let drinksMonthly = drinksMonthly;
-
-
-
-	// calculate 
-	let averageMoneyYearly = (drinksMonthly * 12) * (averageCostDrink);
-
-	// show input
-	let averagetMoneyYearlyinput = document.querySelector('.theaverageamountyoucouldspendyearly');
-
-}
-
-
-//images 
-
-// get green image
-let greenImg = document.querySelector('#greenface');
-
-if (drinksMonthly < 22) {
-
-	avgGradeImg.setAttribute('src', 'green-face.png');
-}
-
-// get yellow image
-let yellowImg = document.querySelector('#yellowface');
-
-if (drinksMonthly > 22) {
-
-	avgGradeImg.setAttribute('src', 'yellow-face.png');
-}
-
-// get red image
-let redImg = document.querySelector('#redface');
-
-if (drinksMonthly = 80) {
-
-	avgGradeImg.setAttribute('src', 'red-face.png');
-}
+document.addEventListener("DOMContentLoaded", function () {
+  const track = document.querySelector(".logo-track");
+  const logos = Array.from(track.children);
+
+  // Duplica los logos para que el desplazamiento sea continuo
+  logos.forEach((logo) => {
+    const clone = logo.cloneNode(true);
+    track.appendChild(clone);
+  });
+});
